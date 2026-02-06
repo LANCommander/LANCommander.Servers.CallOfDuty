@@ -2,7 +2,7 @@
 
 FROM lancommander/base:latest
 
-ENV COD_URL="https://github.com/LANCommander/LANCommander.Servers.CallOfDuty/releases/download/1.5b/cod_lnxded-1.5b.zip"
+ENV COD_URL="https://github.com/LANCommander/LANCommander.Servers.CallOfDuty/releases/download/v1.5b/cod_lnxded-1.5b.zip"
 
 # Server settings
 ENV START_EXE="./cod_lnxded"
@@ -14,7 +14,8 @@ ENV HTTP_FILESERVER_FILE_PATTERN="^/.*\.(pk3|arena|bot|jpg|tga|wav|ogg)$"
 # ----------------------------
 # Dependencies
 # ----------------------------
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN dpkg --add-architecture i386 && \
+    apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
     bzip2 \
@@ -23,6 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     xz-utils \
     p7zip-full \
     gosu \
+    libstdc++5:i386 \
   && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 28960/udp

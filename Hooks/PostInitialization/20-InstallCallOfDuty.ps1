@@ -14,7 +14,7 @@ if (-not (Test-Path -Path "${Env:SERVER_DIR}/cod_lnxded")) {
 
     curl -L --output /tmp/COD.zip "$downloadUrl"
 
-    unzip /tmp/COD.zip -d /tmp/COD
+    unzip /tmp/COD.zip -d /tmp/callofduty
 
     Move-Item -Force -Path "/tmp/callofduty/*" -Destination $Env:SERVER_DIR
 } else {

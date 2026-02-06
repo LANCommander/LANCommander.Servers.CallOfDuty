@@ -1,0 +1,135 @@
+Call Of Duty(tm)
+Linux Multiplayer Server Code
+Version 1.5b
+Readme
+Last update: 2005-1-14
+=============================
+
+!! IMPORTANT !!
+ Call of Duty(tm) Linux Server is NOT SUPPORTED by Activision(r) Customer
+ Support. Please do not call with any questions related to this free beta
+ product. There are other channels to aid you listed at the bottom of this
+ document.
+
+
+===============================================
+
+TABLE OF CONTENTS
+
+1. Introduction
+2. Upgrading an existing Call of Duty(tm) Linux Server
+3. Support Channels
+4. FreeBSD Note
+5. Fixes
+
+===============================================
+
+
+1. Introduction
+
+ This document explains how to install the Call of Duty(tm) Linux server
+ version 1.5b. 
+
+ You must have version 1.5 installed before installing 1.5b
+
+ Usage is very similar to Call of Duty(tm) and Return to Castle
+ Wolfenstein(tm)... many of the console commands, command lines, and cvars
+ are identical.
+
+ MOD USERS: PLEASE READ...
+  It is recommended that any user modifications that have been
+  installed to the Call of Duty(tm) directory be removed before
+  installing this package. These modifications are not supported
+  by Activision(r) and may not be compatible with some of the new
+  features that are included.
+
+ IF YOU HAVE A PROBLEM WITH "LIBSTDC++.SO.5" ...
+  (This is a frequent-enough problem to merit discussion in the introduction.)
+
+  If you are reading this, it's probably because you tried to start your Linux
+   server and saw this message:
+
+    ./cod_lnxded: error while loading shared libraries: libstdc++.so.5:
+     cannot open shared object file: No such file or directory
+
+  Call of Duty(tm) is a C++ program built with gcc 3.2.3, which means it needs a
+  system library specific to gcc 3.2. Older Linux systems won't have
+  this installed, and we're starting to see newer Linux distributions that
+  don't have this either, since they are supplying an incompatible
+  gcc 3.4 version. The good news is that you can drop the needed library
+  into your system without breaking anything else.
+
+  Here is the library you need, if your Linux distribution doesn't supply it:
+    http://icculus.org/updates/cod/gcc3-libs.tar.bz2
+
+  You want to unpack that somewhere that the dynamic linker will see it
+  (if you are sure it won't overwrite any files, you can even use /lib).
+
+  The brave can put it in the same directory as the game and run the server
+  like this:
+     LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. ./cod_lnxded
+
+  Now the server will start.
+
+
+2.Upgrading an existing Call of Duty(tm) Linux server
+
+ You must have 1.5 installed before installing 1.5b.
+
+ - Shutdown your existing Call of Duty(tm) server if it is currently running.
+ - Make a backup of your existing Call of Duty(tm) server's directory, just in case.
+ - Remove any mods you've installed. Incompatible mods left in an upgraded
+   server are among the most frequent bug reports!
+ - Unpack this archive in the games directory:
+	
+	cd /where/i/installed/COD
+	tar -xjvvf cod-lnxded-bins-1.5b.tar.bz2
+
+ - Now the server can be restarted, and should function as before, except
+   with the new patch fixes and features. You should experiment with readding
+   your mods one by one to see if any are incompatible with the new patch.
+
+
+3. Support Channels
+
+ There are a LOT of knobs to tweak to customize and automate your server,
+ but it is beyond the scope of this documentation. Please refer to the
+ admin manuals for any Quake 3(tm) based Multiplayer game (including Quake 3
+ Arena(tm), Return to Castle Wolfenstein(tm), etc) for specifics.
+
+ There is a mailing list for discussion and support of Call of Duty(tm) and
+ Call of Duty(tm): United Offensive(tm) Linux servers. Hundreds of experienced
+ server admins and even some of the game's developers monitor this list, and
+ are eager to help with politely asked questions. Send a blank email to
+ cod-subscribe@icculus.org to get on the list, and list archives can be seen
+ at:
+
+   http://icculus.org/cgi-bin/ezmlm/ezmlm-cgi?38
+
+ Bug reports should NOT be sent to the list. We have a web-based
+ bugtracking system for this. If you don't report bugs there, we don't
+ promise to even be aware of them, let alone fix them! You can find the bug
+ tracker here:
+
+   https://bugzilla.icculus.org/
+
+
+4.  FreeBSD users
+
+ This server is known to work on FreeBSD with the Linux binary compatibility
+ layer. If it doesn't, we consider it a bug and appreciate the report since we
+ won't necessarily be testing on FreeBSD ourselves. Please note, that as of
+ version 1.2, the server requires that you use the linux_base-8 package for
+ binary compatibility (it has a C++ runtime library we now need that previous
+ linux_base packages don't supply...alternately, see notes about libstdc++ in
+ this document's introduction if you can't or won't update linux_base).
+
+
+5. Fixes
+
+ 
+ This patch resolves an exploit that can be used to crash servers.
+
+
+// end of README
+
